@@ -11,14 +11,19 @@
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.kaabix.StartupPalApp",
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.kaabix.StartupPalApp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -27,6 +32,12 @@
       "eas": {
         "projectId": "ba5d297e-3df5-4b82-884b-ac6a9afdbd28"
       }
+    },
+    "runtimeVersion": {
+      "policy": "appVersion"
+    },
+    "updates": {
+      "url": "https://u.expo.dev/ba5d297e-3df5-4b82-884b-ac6a9afdbd28"
     }
   }
 }

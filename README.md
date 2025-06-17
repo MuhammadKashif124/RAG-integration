@@ -76,6 +76,14 @@ Defines TypeScript interfaces for request and response data:
 
 ---
 
+
+npm install @expo/ngrok@^4.1.0
+
+
+nohup npx expo start --tunnel > expo.log 2>&1 &
+
+npx expo start --tunnel
+
 ## 7. References
 - [Backend Swagger Docs](https://4203-3-8-149-241.ngrok-free.app/docs)
 - [API Service Code](src/services/api.ts)
