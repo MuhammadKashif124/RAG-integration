@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PitchInput, PitchOutput } from '../types';
 
-const API_URL = 'https://4203-3-8-149-241.ngrok-free.app/api/v1';
+const API_URL = 'https://a79d-3-8-149-241.ngrok-free.app/api/v1';
 
 export const generatePitch = async (pitchInput: PitchInput): Promise<PitchOutput> => {
   try {
