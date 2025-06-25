@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform } from 'react-native';
+import { View, StyleSheet, ActivityIndicator, KeyboardAvoidingView, Platform, SafeAreaView } from 'react-native';
 import { Snackbar, FAB } from 'react-native-paper';
 import PitchForm from '../components/PitchForm';
 import PitchResult from '../components/PitchResult';
@@ -42,42 +42,50 @@ const MainScreen: React.FC = () => {
   }
 
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.select({ ios: 'padding', android: 'height' })}
-      keyboardVerticalOffset={Platform.select({ ios: 0, android: 25 })}
-    >
-      <View style={styles.container}>
-        {showForm ? (
-          <PitchForm onSubmit={handleSubmit} isLoading={isLoading} />
-        ) : (
-          <>
-            <PitchResult result={result} />
-            <FAB
-              style={styles.fab}
-              icon="arrow-left"
-              onPress={handleBackToForm}
-              label="New Pitch"
-            />
-          </>
-        )}
-        
-        <Snackbar
-          visible={!!error}
-          onDismiss={() => setError(null)}
-          action={{
-            label: 'OK',
-            onPress: () => setError(null),
-          }}
-        >
-          {error}
-        </Snackbar>
-      </View>
-    </KeyboardAvoidingView>
+    <SafeAreaView style={styles.safeArea}>
+      <KeyboardAvoidingView
+        style={styles.keyboardAvoid}
+        behavior={Platform.select({ ios: 'padding', android: undefined })}
+        keyboardVerticalOffset={Platform.select({ ios: 90, android: 0 })}
+      >
+        <View style={styles.container}>
+          {showForm ? (
+            <PitchForm onSubmit={handleSubmit} isLoading={isLoading} />
+          ) : (
+            <>
+              <PitchResult result={result} />
+              <FAB
+                style={styles.fab}
+                icon="arrow-left"
+                onPress={handleBackToForm}
+                label="New Pitch"
+              />
+            </>
+          )}
+          
+          <Snackbar
+            visible={!!error}
+            onDismiss={() => setError(null)}
+            action={{
+              label: 'OK',
+              onPress: () => setError(null),
+            }}
+          >
+            {error}
+          </Snackbar>
+        </View>
+      </KeyboardAvoidingView>
+    </SafeAreaView>
   );
 };
 
 const styles = StyleSheet.create({
+  safeArea: {
+    flex: 1,
+  },
+  keyboardAvoid: {
+    flex: 1,
+  },
   container: {
     flex: 1,
   },

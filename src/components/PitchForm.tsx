@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import React, { useState, useRef } from 'react';
+import { View, StyleSheet, ScrollView, Keyboard, Platform } from 'react-native';
 import { TextInput, Button, Text, Card } from 'react-native-paper';
 import { PitchInput } from '../types';
 import { samplePitchInput } from '../utils/sampleData';
@@ -10,6 +10,7 @@ interface PitchFormProps {
 }
 
 const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
+  const scrollViewRef = useRef<ScrollView>(null);
   const [formData, setFormData] = useState<PitchInput>({
     startup_name: '',
     problem_description: '',
@@ -34,6 +35,7 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
   };
 
   const handleSubmit = () => {
+    Keyboard.dismiss();
     onSubmit(formData);
   };
 
@@ -47,8 +49,21 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
     handleChange('investor_type', type);
   };
 
+  // Scroll to bottom when focusing on the last input
+  const handleFocusLastInput = () => {
+    setTimeout(() => {
+      scrollViewRef.current?.scrollToEnd({ animated: true });
+    }, 100);
+  };
+
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      ref={scrollViewRef}
+      contentContainerStyle={styles.contentContainer}
+      keyboardShouldPersistTaps="handled"
+      showsVerticalScrollIndicator={true}
+    >
       <Text style={styles.title}>Generate Your Startup Pitch</Text>
       
       <View style={styles.sampleButtonContainer}>
@@ -166,19 +181,28 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
             value={formData.funding_details}
             onChangeText={(text) => handleChange('funding_details', text)}
             style={styles.input}
+            onFocus={handleFocusLastInput}
           />
           
-          <Button 
-            mode="contained" 
-            onPress={handleSubmit} 
-            loading={isLoading}
-            disabled={isLoading}
-            style={styles.button}
-          >
-            Generate Pitch
-          </Button>
+          <View style={styles.generateButtonContainer}>
+            <Button 
+              mode="contained" 
+              onPress={handleSubmit} 
+              loading={isLoading}
+              disabled={isLoading}
+              style={styles.button}
+              contentStyle={styles.buttonContent}
+              labelStyle={styles.buttonLabel}
+              icon="rocket-launch"
+            >
+              Generate Pitch
+            </Button>
+          </View>
         </>
       )}
+      
+      {/* Extra padding at the bottom to ensure scrollability */}
+      <View style={styles.bottomPadding} />
     </ScrollView>
   );
 };
@@ -186,7 +210,10 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+  },
+  contentContainer: {
     padding: 16,
+    paddingBottom: Platform.OS === 'ios' ? 120 : 100,
   },
   title: {
     fontSize: 24,
@@ -197,9 +224,27 @@ const styles = StyleSheet.create({
   input: {
     marginBottom: 12,
   },
-  button: {
+  generateButtonContainer: {
     marginTop: 20,
-    marginBottom: 40,
+    marginBottom: 20,
+    paddingHorizontal: 10,
+  },
+  button: {
+    borderRadius: 8,
+    marginBottom: 20,
+    elevation: 4,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  buttonContent: {
+    paddingVertical: 10,
+    height: 56,
+  },
+  buttonLabel: {
+    fontSize: 18,
+    fontWeight: 'bold',
   },
   sampleButtonContainer: {
     alignItems: 'flex-end',
@@ -233,6 +278,9 @@ const styles = StyleSheet.create({
   selectedTypeText: {
     fontSize: 16,
     fontWeight: 'bold',
+  },
+  bottomPadding: {
+    height: 80,
   },
 });
 
