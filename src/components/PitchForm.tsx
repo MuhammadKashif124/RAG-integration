@@ -95,14 +95,14 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
           </Card>
 
           <TextInput
-            label="What is the name of your startup?"
+            label="Startup name?"
             value={formData.startup_name}
             onChangeText={(text) => handleChange('startup_name', text)}
             style={styles.input}
           />
           
           <TextInput
-            label="Briefly describe the core problem your product solves."
+            label="What problem does it solve?"
             value={formData.problem_description}
             onChangeText={(text) => handleChange('problem_description', text)}
             style={styles.input}
@@ -110,7 +110,7 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
           />
           
           <TextInput
-            label="How does your product or solution work?"
+            label="How does it work?"
             value={formData.solution_description}
             onChangeText={(text) => handleChange('solution_description', text)}
             style={styles.input}
@@ -118,35 +118,35 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
           />
           
           <TextInput
-            label="Who is your target customer or end user?"
+            label="Who are your users?"
             value={formData.target_customer}
             onChangeText={(text) => handleChange('target_customer', text)}
             style={styles.input}
           />
           
           <TextInput
-            label="What's your business model? (e.g., subscription, B2B SaaS, marketplace)"
+            label="Business model? (e.g., subscription, B2B, SaaS)"
             value={formData.business_model}
             onChangeText={(text) => handleChange('business_model', text)}
             style={styles.input}
           />
           
           <TextInput
-            label="What stage are you currently at? (idea, MVP, launched, early revenue, etc.)"
+            label="What stage are you at?"
             value={formData.current_stage}
             onChangeText={(text) => handleChange('current_stage', text)}
             style={styles.input}
           />
           
           <TextInput
-            label="Who are your known competitors (if any)?"
+            label="Any known competitors?"
             value={formData.competitors}
             onChangeText={(text) => handleChange('competitors', text)}
             style={styles.input}
           />
           
           <TextInput
-            label="What makes your startup different or better than those competitors?"
+            label="What makes you stand out?"
             value={formData.differentiators}
             onChangeText={(text) => handleChange('differentiators', text)}
             style={styles.input}
@@ -154,7 +154,7 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
           />
           
           <TextInput
-            label="What impact do you expect your product to have once it's on the market?"
+            label="Expected market impact?"
             value={formData.market_impact}
             onChangeText={(text) => handleChange('market_impact', text)}
             style={styles.input}
@@ -162,7 +162,7 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
           />
           
           <TextInput
-            label="How much funding are you seeking, and what will it be used for?"
+            label="How much funding and why?"
             value={formData.funding_details}
             onChangeText={(text) => handleChange('funding_details', text)}
             style={styles.input}
