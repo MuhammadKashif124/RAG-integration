@@ -45,6 +45,8 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
                 title={competitor.name}
                 description={competitor.description}
                 titleStyle={styles.competitorName}
+                descriptionNumberOfLines={10}
+                descriptionStyle={styles.competitorDescription}
               />
               
               {competitor.strengths.length > 0 && (
@@ -56,6 +58,8 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
                       title={strength}
                       left={() => <List.Icon icon="check" />}
                       titleStyle={styles.listItem}
+                      titleNumberOfLines={5}
+                      titleEllipsizeMode="tail"
                     />
                   ))}
                 </View>
@@ -70,6 +74,8 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
                       title={weakness}
                       left={() => <List.Icon icon="close" />}
                       titleStyle={styles.listItem}
+                      titleNumberOfLines={5}
+                      titleEllipsizeMode="tail"
                     />
                   ))}
                 </View>
@@ -102,6 +108,9 @@ const styles = StyleSheet.create({
   competitorName: {
     fontWeight: 'bold',
   },
+  competitorDescription: {
+    flexWrap: 'wrap',
+  },
   divider: {
     marginVertical: 8,
   },
@@ -115,6 +124,7 @@ const styles = StyleSheet.create({
   },
   listItem: {
     fontSize: 14,
+    flexWrap: 'wrap',
   },
 });
 
