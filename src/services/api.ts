@@ -1,7 +1,7 @@
 import axios from 'axios';
 import { PitchInput, PitchOutput, Competitor } from '../types';
 
-const API_URL = 'https://92ea-18-170-120-114.ngrok-free.app/api/v1';
+const API_URL = 'https://ded8-18-132-119-160.ngrok-free.app/api/v1';
 
 // Fallback data for when API returns placeholder values
 const getVentureCapitalistFallbackData = (input: PitchInput): Partial<PitchOutput> => {

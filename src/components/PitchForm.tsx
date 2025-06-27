@@ -241,10 +241,12 @@ const styles = StyleSheet.create({
   buttonContent: {
     paddingVertical: 10,
     height: 56,
+    paddingHorizontal: Platform.OS === 'android' ? 16 : 10,
   },
   buttonLabel: {
     fontSize: 18,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
   sampleButtonContainer: {
     alignItems: 'flex-end',

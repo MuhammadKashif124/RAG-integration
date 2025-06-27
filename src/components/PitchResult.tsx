@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, StyleSheet, ScrollView } from 'react-native';
+import { View, StyleSheet, ScrollView, Platform } from 'react-native';
 import { Card, Title, Paragraph, List, Divider } from 'react-native-paper';
 import { PitchOutput } from '../types';
 
@@ -11,7 +11,10 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
   if (!result) return null;
 
   return (
-    <ScrollView style={styles.container}>
+    <ScrollView 
+      style={styles.container}
+      contentContainerStyle={styles.contentContainer}
+    >
       <Title style={styles.title}>Your Generated Pitch</Title>
       
       <Card style={styles.card}>
@@ -92,6 +95,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 16,
+    paddingBottom: Platform.OS === 'android' ? 80 : 16,
   },
   title: {
     fontSize: 24,
@@ -125,6 +129,9 @@ const styles = StyleSheet.create({
   listItem: {
     fontSize: 14,
     flexWrap: 'wrap',
+  },
+  contentContainer: {
+    paddingBottom: Platform.OS === 'android' ? 80 : 16,
   },
 });
 
