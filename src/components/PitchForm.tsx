@@ -191,11 +191,8 @@ const PitchForm: React.FC<PitchFormProps> = ({ onSubmit, isLoading }) => {
               loading={isLoading}
               disabled={isLoading}
               style={styles.button}
-              contentStyle={styles.buttonContent}
-              labelStyle={styles.buttonLabel}
-              icon="rocket-launch"
             >
-              Generate Pitch
+              Generate
             </Button>
           </View>
         </>
@@ -227,26 +224,11 @@ const styles = StyleSheet.create({
   generateButtonContainer: {
     marginTop: 20,
     marginBottom: 20,
-    paddingHorizontal: 10,
+    paddingHorizontal: 20,
   },
   button: {
-    borderRadius: 8,
+    borderRadius: 4,
     marginBottom: 20,
-    elevation: 4,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 2 },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-  },
-  buttonContent: {
-    paddingVertical: 10,
-    height: 56,
-    paddingHorizontal: Platform.OS === 'android' ? 16 : 10,
-  },
-  buttonLabel: {
-    fontSize: 18,
-    fontWeight: 'bold',
-    textAlign: 'center',
   },
   sampleButtonContainer: {
     alignItems: 'flex-end',
