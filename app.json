@@ -14,7 +14,17 @@
       "supportsTablet": true,
       "bundleIdentifier": "com.kaabix.StartupPalApp",
       "infoPlist": {
-        "ITSAppUsesNonExemptEncryption": false
+        "ITSAppUsesNonExemptEncryption": false,
+        "NSAppTransportSecurity": {
+          "NSAllowsArbitraryLoads": true,
+          "NSExceptionDomains": {
+            "18.132.119.160": {
+              "NSExceptionAllowsInsecureHTTPLoads": true,
+              "NSExceptionMinimumTLSVersion": "1.0",
+              "NSIncludesSubdomains": true
+            }
+          }
+        }
       }
     },
     "android": {
@@ -23,7 +33,9 @@
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
-      "package": "com.kaabix.StartupPalApp"
+      "package": "com.kaabix.StartupPalApp",
+      "usesCleartextTraffic": true,
+      "networkSecurityConfig": "./android-network-security-config.xml"
     },
     "web": {
       "favicon": "./assets/favicon.png"
