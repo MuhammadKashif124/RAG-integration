@@ -4,7 +4,7 @@
     "slug": "StartupPalApp",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./StartupPalApp/assets/icon.png",
     "userInterfaceStyle": "light",
     "newArchEnabled": true,
     "assetBundlePatterns": [
@@ -29,7 +29,7 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
+        "foregroundImage": "./StartupPalApp/assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
       "edgeToEdgeEnabled": true,
@@ -38,7 +38,7 @@
       "networkSecurityConfig": "./android-network-security-config.xml"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./StartupPalApp/assets/favicon.png"
     },
     "extra": {
       "eas": {
