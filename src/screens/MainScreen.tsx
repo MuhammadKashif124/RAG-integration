@@ -18,6 +18,7 @@ const MainScreen: React.FC = () => {
     
     try {
       const response = await generatePitch(data);
+      console.log('MainScreen received response:', JSON.stringify(response, null, 2));
       setResult(response);
       setShowForm(false);
     } catch (err) {

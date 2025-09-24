@@ -8,7 +8,22 @@ interface PitchResultProps {
 }
 
 const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
-  if (!result) return null;
+  console.log('PitchResult received result:', JSON.stringify(result, null, 2));
+  
+  if (!result) {
+    console.log('PitchResult: No result provided');
+    return null;
+  }
+
+  // Ensure all required fields exist with fallbacks
+  const safeResult = {
+    elevator_pitch: result.elevator_pitch || 'No elevator pitch available.',
+    full_pitch: result.full_pitch || 'No full pitch available.',
+    market_insights: result.market_insights || 'No market insights available.',
+    identified_competitors: result.identified_competitors || []
+  };
+  
+  console.log('PitchResult safeResult:', JSON.stringify(safeResult, null, 2));
 
   return (
     <ScrollView 
@@ -20,39 +35,39 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
       <Card style={styles.card}>
         <Card.Content>
           <Title>Elevator Pitch</Title>
-          <Paragraph>{result.elevator_pitch}</Paragraph>
+          <Paragraph>{safeResult.elevator_pitch}</Paragraph>
         </Card.Content>
       </Card>
       
       <Card style={styles.card}>
         <Card.Content>
           <Title>Full Pitch</Title>
-          <Paragraph>{result.full_pitch}</Paragraph>
+          <Paragraph>{safeResult.full_pitch}</Paragraph>
         </Card.Content>
       </Card>
       
       <Card style={styles.card}>
         <Card.Content>
           <Title>Market Insights</Title>
-          <Paragraph>{result.market_insights}</Paragraph>
+          <Paragraph>{safeResult.market_insights}</Paragraph>
         </Card.Content>
       </Card>
       
       <Card style={styles.card}>
         <Card.Content>
           <Title>Identified Competitors</Title>
-          {result.identified_competitors.map((competitor, index) => (
+          {safeResult.identified_competitors && Array.isArray(safeResult.identified_competitors) ? safeResult.identified_competitors.map((competitor, index) => (
             <View key={index} style={styles.competitorContainer}>
               {index > 0 && <Divider style={styles.divider} />}
               <List.Item
-                title={competitor.name}
-                description={competitor.description}
+                title={competitor.name || 'Unknown Competitor'}
+                description={competitor.description || 'No description available.'}
                 titleStyle={styles.competitorName}
                 descriptionNumberOfLines={10}
                 descriptionStyle={styles.competitorDescription}
               />
               
-              {competitor.strengths.length > 0 && (
+              {competitor.strengths && Array.isArray(competitor.strengths) && competitor.strengths.length > 0 && (
                 <View style={styles.listSection}>
                   <Paragraph style={styles.listTitle}>Strengths:</Paragraph>
                   {competitor.strengths.map((strength, idx) => (
@@ -68,7 +83,7 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
                 </View>
               )}
               
-              {competitor.weaknesses.length > 0 && (
+              {competitor.weaknesses && Array.isArray(competitor.weaknesses) && competitor.weaknesses.length > 0 && (
                 <View style={styles.listSection}>
                   <Paragraph style={styles.listTitle}>Weaknesses:</Paragraph>
                   {competitor.weaknesses.map((weakness, idx) => (
@@ -84,7 +99,9 @@ const PitchResult: React.FC<PitchResultProps> = ({ result }) => {
                 </View>
               )}
             </View>
-          ))}
+          )) : (
+            <Paragraph>No competitors identified.</Paragraph>
+          )}
         </Card.Content>
       </Card>
     </ScrollView>
